@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('{% static "images/background3.jpg" %}') no-repeat center center fixed;
+    background: url('{% static "images/background.jpg" %}') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
@@ -50,6 +50,18 @@ body {
 
 .border-black {
     border: 1px solid black !important;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+    color: white; /* Text color */
+    text-align: center; /* Centered text */
+    padding: 15px 0; /* Top and bottom padding */
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.footer p {
+    margin: 0; /* Removes default margin */
 }
 
 /* -------------------------------- Media Queries */
