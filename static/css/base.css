@@ -3,7 +3,9 @@ html {
 }
 
 body {
-    background: url('{% static "images/background.jpg" %}') no-repeat center center fixed;
+    display: flex;
+    flex-direction: column;
+    background: url('/static/images/background_image.jpg') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
@@ -53,15 +55,21 @@ body {
 }
 
 .footer {
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background */
-    color: white; /* Text color */
-    text-align: center; /* Centered text */
-    padding: 15px 0; /* Top and bottom padding */
-    margin-top: auto; /* Pushes footer to the bottom */
+    background-color: #f8f9fa;
+    color: #555;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: 0.15rem 0;
 }
 
-.footer p {
-    margin: 0; /* Removes default margin */
+.footer .container {
+    padding: 0.15rem;
+}
+
+.footer span {
+    font-size: 0.875rem;
+    color: #6c757d;
 }
 
 /* -------------------------------- Media Queries */
