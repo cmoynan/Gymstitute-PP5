@@ -5,7 +5,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    background: url('/static/images/background.jpg') no-repeat center center fixed;
+    background: url('/static/images/background1.jpg') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
@@ -25,22 +25,29 @@ body {
     width: fit-content;
 }
 
-.logo-background {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 90%;
-    text-align: center; 
-    display: inline-block; 
-    width: 100%;
-}
-
 .shop-now-button {
-    background: black;
+    background: transparent;
     color: white;
     min-width: 260px;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: 2px solid rgb(0, 0, 139);
+    text-align: center;
 }
 
 .btn-black {
-    background: black;
+    background: transparent;
+    color: white;
+    border: 2px solid rgb(0, 0, 139);
+}
+
+.shop-now-button:hover,
+.shop-now-button:active,
+.shop-now-button:focus,
+.btn-black:hover,
+.btn-black:active,
+.btn-black:focus {
+    background: rgb(0, 0, 139);
     color: white;
 }
 
@@ -50,7 +57,7 @@ body {
 .btn-black:hover,
 .btn-black:active,
 .btn-black:focus {
-    background: #222;
+    background: #000066;
     color: white;
 }
 
