@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col my-auto">
+            <h1 class="display-5 logo-font text-white logo-background">Choose a Category</h1>
+
+            <div class="list-group">
+                {% for category in categories %}
+                <a href="#" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
+                    <strong>{{ category.name }}</strong>
+                </a>
+                {% empty %}
+                <div class="list-group-item">No categories available.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
