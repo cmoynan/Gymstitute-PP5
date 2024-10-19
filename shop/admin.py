@@ -3,6 +3,6 @@ from .models import Category
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class Category(admin.ModelAdmin):
     list_display = ('name', 'description')
     search_fields = ('name',)
