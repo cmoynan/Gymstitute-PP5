@@ -11,3 +11,7 @@ def category_list(request):
     ]
     
     return render(request, 'shop/category_list.html', {'categories': categories})
+
+def clothing_list(request):
+    clothes = Clothing.objects.filter(available=True)
+    return render(request, 'shop/clothing_list.html', {'clothes': clothes})

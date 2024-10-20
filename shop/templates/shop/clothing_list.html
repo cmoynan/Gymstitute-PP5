@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1>Clothing</h1>
+<div class="clothing-items">
+    {% for item in clothes %}
+        <div class="clothing-item">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            <h2>{{ item.name }}</h2>
+            <p>{{ item.description }}</p>
+            <p>Price: ${{ item.price }}</p>
+        </div>
+    {% endfor %}
+</div>
