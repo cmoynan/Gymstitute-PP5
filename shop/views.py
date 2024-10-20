@@ -1,17 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Clothing
+
 
 # Create your views here.
 
 def category_list(request):
-    categories = [
-        {'name': 'Clothing', 'description': 'Shop the latest clothing trends.'},
-        {'name': 'Electronics', 'description': 'Find the best electronics.'},
-        {'name': 'Workout Plans', 'description': 'Get fit with our workout plans.'},
-        {'name': 'Meal Plans', 'description': 'Healthy meal plans for you.'},
-    ]
+    categories = Category.objects.all()
+    return render(request, 'shop/category_list.html', {'categories': categories})
     
     return render(request, 'shop/category_list.html', {'categories': categories})
 
-def clothing_list(request):
-    clothes = Clothing.objects.filter(available=True)
-    return render(request, 'shop/clothing_list.html', {'clothes': clothes})
+def clothing_list(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    clothing_items = Clothing.objects.filter(category=category)
+    return render(request, 'shop/clothing_list.html', {'category': category, 'clothing_items': clothing_items})

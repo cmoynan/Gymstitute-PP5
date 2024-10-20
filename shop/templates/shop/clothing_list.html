@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block content %}
-<h1>Clothing</h1>
-<div class="clothing-items">
-    {% for item in clothes %}
-        <div class="clothing-item">
-            <img src="{{ item.image.url }}" alt="{{ item.name }}">
-            <h2>{{ item.name }}</h2>
-            <p>{{ item.description }}</p>
-            <p>Price: ${{ item.price }}</p>
+<div class="container">
+    <h1>Clothing in {{ category.name }}</h1>
+    <div class="row">
+        {% for item in clothing_items %}
+        <div class="col-md-4">
+            <div class="card mb-1">
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="card-text"><strong>Price: ${{ item.price }}</strong></p>
+                </div>
+            </div>
         </div>
-    {% endfor %}
+        {% empty %}
+        <p>No clothing items available in this category.</p>
+        {% endfor %}
+    </div>
 </div>
+{% endblock %}

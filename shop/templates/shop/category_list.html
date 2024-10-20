@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block content %}
 <div class="container h-100">
     <div class="row h-100">
@@ -10,7 +8,7 @@
 
             <div class="list-group">
                 {% for category in categories %}
-                <a href="#" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
+                <a href="{% url 'clothing_list' category.id %}" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
                     <strong>{{ category.name }}</strong>
                 </a>
                 {% empty %}
