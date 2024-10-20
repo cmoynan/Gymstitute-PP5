@@ -90,65 +90,74 @@ body {
 
 /* Main categories container */
 .categories-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly white background for readability */
+    background-color: rgba(255, 255, 255, 0.9); 
     border-radius: 8px;
-    padding: 20px; /* Padding around the content */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    margin-top: 20px; /* Space from the top */
+    padding: 20px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px; 
 }
 
 /* Category heading */
 .categories-container h2 {
-    font-size: 2rem; /* Larger font size for headings */
-    color: rgb(0, 0, 139); /* Dark blue for headings */
-    margin-bottom: 15px; /* Space below the heading */
+    font-size: 2rem;
+    color: rgb(0, 0, 139); 
+    margin-bottom: 15px;
 }
 
 /* List of categories */
 .category-list {
-    list-style: none; /* Remove default list styles */
-    padding: 0; /* Remove padding */
+    list-style: none; 
+    padding: 0; 
 }
 
 /* Individual category item */
 .category-item {
-    display: flex; /* Flex for alignment */
-    justify-content: space-between; /* Space out name and description */
-    align-items: center; /* Center items vertically */
-    padding: 15px; /* Padding for category items */
-    margin: 10px 0; /* Margin between items */
-    background-color: #f8f9fa; /* Light gray background */
-    border: 1px solid #e0e0e0; /* Border around items */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth background change */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px; 
+    margin: 10px 0; 
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
 }
 
 /* Hover effect for category items */
 .category-item:hover {
-    background-color: #e0e0e0; /* Change background on hover */
+    background-color: #e0e0e0;
 }
 
 /* Strong text for category names */
 .category-item strong {
-    color: rgb(0, 0, 139); /* Color for strong text */
+    color: rgb(0, 0, 139);
 }
 
 /* Button styles for actions in category items */
 .category-button {
-    background-color: rgb(0, 0, 139); /* Primary button color */
-    color: white; /* White text */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 15px; /* Padding */
-    cursor: pointer; /* Pointer cursor on hover */
-    text-align: center; /* Center text */
+    background-color: rgb(0, 0, 139); 
+    color: white; 
+    border: none; 
+    border-radius: 5px;
+    padding: 10px 15px; 
+    cursor: pointer; 
+    text-align: center; 
 }
 
 /* Button hover effects */
 .category-button:hover {
-    background-color: #000066; /* Darken button on hover */
+    background-color: #000066;
 }
 
+.card {
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
 
 .footer {
     background-color: #f8f9fa;
