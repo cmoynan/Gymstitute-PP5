@@ -64,15 +64,15 @@ body {
     color: white;
 }
 
-.shop-now-button:hover,
-.shop-now-button:active,
-.shop-now-button:focus,
-.btn-black:hover,
-.btn-black:active,
-.btn-black:focus {
+.card:hover,
+.card:active,
+.card:focus,
+.card:hover
+{
     background: #000066;
     color: white;
 }
+
 
 .bg-black {
     background-color: #000;

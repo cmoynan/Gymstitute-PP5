@@ -7,7 +7,7 @@
     <h1 class="display-5 logo-font text-white logo-background mt-5">Clothes</h1> 
     <div class="row">
         {% for item in clothing_items %}
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <div class="card h-100 border-0">
                 <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" style="height: 150px; object-fit: cover;"> <!-- Reduced image height -->
                 <div class="card-body text-center"> 
