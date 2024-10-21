@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    width: 100%;
 }
 
 body {
@@ -47,6 +48,7 @@ body {
 
 .main-nav {
     text-align: center;
+    width: 100vw;
 }
 
 .logo-background {
@@ -62,6 +64,15 @@ body {
 .btn-black:focus {
     background: rgb(0, 0, 139);
     color: white;
+}
+
+.navbar {
+    background: rgb(0, 0, 139);
+    color: white;
+    padding: 0;
+    margin: 0;
+    width: 100vw !important;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
 .card:hover,
