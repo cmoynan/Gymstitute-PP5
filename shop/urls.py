@@ -6,8 +6,9 @@ from .views import category_list
 from shop import views
 
 urlpatterns = [
-    path('', category_list, name='category_list'),
     path('categories/', views.category_list, name='category_list'),
-    path('clothing/<int:category_id>/', views.clothing_list, name='clothing_list'),
-    path('electronics/<int:category_id>/', views.clothing_list, name='electronic_list'),
+    path('clothing/<int:id>/', views.clothing_list, name='clothing_list'),
+    path('electronics/<int:id>/', views.electronic_list, name='electronic_list'),
+    path('workouts/<int:id>/', views.workout_list, name='workout_list'),
+    path('meals/<int:id>/', views.meal_list, name='meal_list'),
 ]

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="display-5 logo-font text-white logo-background mt-5">Clothing</h1> 
+    <div class="row">
+        {% for item in meal_items %}
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <div class="card h-100 border-0">
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" style="height: 150px; object-fit: cover;">
+                <div class="card-body text-center"> 
+                    <h6 class="card-title">{{ item.name }}</h6>
+                    <p class="card-text">{{ item.description|truncatewords:5 }}</p> 
+                    <p class="card-text"><strong>Price: ${{ item.price }}</strong></p>
+                    <a href="#" class="btn btn-primary btn-sm">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No Meal items available in this category.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

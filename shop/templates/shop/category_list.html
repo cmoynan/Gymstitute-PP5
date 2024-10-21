@@ -9,13 +9,32 @@
             <h1 class="display-5 logo-font text-white logo-background">Choose a Category</h1>
 
             <div class="list-group">
+                
+                
                 {% for category in categories %}
-                <a href="{% url 'clothing_list' category.id %}" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
-                    <strong>{{ category.name }}</strong>
-                </a>
-                {% empty %}
-                <div class="list-group-item">No categories available.</div>
+                    
+                    {% if category.name == "Electronics" %}
+                    <a href="{% url 'electronic_list' category.id %}" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
+                        <strong>{{ category.name }}</strong>
+                    </a>
+                        
+                    
+                    {% elif category.name == "Workout Plans" %}
+                        <a href="{% url 'workout_list' category.id %}" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
+                            <strong>{{ category.name }}</strong>
+                        </a>
+                    
+                    {% elif category.name == "Meal Plans" %}
+                        <a href="{% url 'meal_list' category.id %}" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
+                            <strong>{{ category.name }}</strong>
+                        </a>
+                    {% elif category.name == "Clothes" %}
+                    <a href="{% url 'clothing_list' category.id %}" class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3" style="max-width: 300px;">
+                        <strong>{{ category.name }}</strong>
+                    </a>    
+                    {% endif %}
                 {% endfor %}
+
             </div>
         </div>
     </div>
