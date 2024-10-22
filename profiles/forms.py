@@ -1,13 +1,34 @@
 from django import forms
 from .models import UserProfile
 
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['default_address', 'default_city', 'default_postcode', 'default_country']
-        widgets = {
-            'default_address': forms.TextInput(attrs={'placeholder': 'Enter your address', 'class': 'form-control'}),
-            'default_city': forms.TextInput(attrs={'placeholder': 'Enter your city', 'class': 'form-control'}),
-            'default_postcode': forms.TextInput(attrs={'placeholder': 'Enter your postcode', 'class': 'form-control'}),
-            'default_country': forms.TextInput(attrs={'placeholder': 'Enter your country', 'class': 'form-control'}),
+        exclude = ('user',)
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'default_phone_number': 'Phone Number',
+            'default_postcode': 'Postal Code',
+            'default_town_or_city': 'Town or City',
+            'default_street_address1': 'Street Address 1',
+            'default_street_address2': 'Street Address 2',
+            'default_county': 'County, State or Locality',
         }
+
+        self.fields['default_phone_number'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+            if field != 'default_country':
+                if self.fields[field].required:
+                    placeholder = f'{placeholders[field]} *'
+                else:
+                    placeholder = placeholders[field]
+                self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 profile-form-input'
+            self.fields[field].label = False

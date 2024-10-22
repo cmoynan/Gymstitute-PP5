@@ -170,6 +170,28 @@ body {
     object-fit: cover;
 }
 
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 50%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.form-control::placeholder {
+    color: #6c757d; /* Bootstrap's placeholder color */
+    opacity: 1; /* Firefox lowers the opacity of placeholders by default */
+}
+
 .footer {
     background-color: #f8f9fa;
     color: #555;
