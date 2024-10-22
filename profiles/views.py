@@ -1,24 +1,30 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .models import UserProfile
 from .forms import UserProfileForm
 
-# Create your views here.
-
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import UserProfile
-
-@login_required
 def profile(request):
-    """Display and update the user's profile."""
+    """ Display the user's profile. """
+    # Get the user profile based on the logged-in user
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
-        # Your form processing logic here (if applicable)
-        pass
+        # If the form is submitted, bind the data to the form
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()  # Save the updated profile
+            messages.success(request, 'Profile updated successfully')
+        else:
+            messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
-        # Just display the profile
-        pass
+        # If it's a GET request, populate the form with the current profile data
+        form = UserProfileForm(instance=profile)
 
-    return render(request, 'profiles/profile.html', {'profile': profile})
+    # Render the profile template with the form
+    template = 'profiles/profile.html'
+    context = {
+        'form': form,
+        'on_profile_page': True  # Optional: to indicate we are on the profile page
+    }
+
+    return render(request, template, context)

@@ -1,27 +1,33 @@
-{% extends 'base.html' %}
+<!-- templates/profiles/profile.html -->
+{% extends "base.html" %}
 
 {% block content %}
-<div class="container my-4">
-    <h1>My Profile</h1>
-
-    <h3>Delivery Details</h3>
-    <form method="POST">
+<div class="container">
+    <h1>Your Profile</h1>
+    <form method="POST" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            <label class="form-label" for="{{ form.default_address.id_for_label }}">{{ form.default_address.label }}</label>
+            {{ form.default_address }}  <!-- Directly render the form field -->
+            {{ form.default_address.errors }}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ form.default_city.id_for_label }}">{{ form.default_city.label }}</label>
+            {{ form.default_city }}  <!-- Directly render the form field -->
+            {{ form.default_city.errors }}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ form.default_postcode.id_for_label }}">{{ form.default_postcode.label }}</label>
+            {{ form.default_postcode }}  <!-- Directly render the form field -->
+            {{ form.default_postcode.errors }}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ form.default_country.id_for_label }}">{{ form.default_country.label }}</label>
+            {{ form.default_country }}  <!-- Directly render the form field -->
+            {{ form.default_country.errors }}
+        </div>
         <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
-
-    <h3 class="mt-4">Order History</h3>
-    {% if orders %}
-        <ul>
-        {% for order in orders %}
-            <li>
-                Order #{{ order.order_number }} - {{ order.date|date:"F j, Y" }}
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>You have no orders.</p>
-    {% endif %}
 </div>
 {% endblock %}
