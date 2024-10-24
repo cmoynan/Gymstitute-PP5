@@ -1,26 +1,25 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Clothing, Electronic, Workout, Meal
+from .models import Category, Product
+
+# Create your views here.
 
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'shop/category_list.html', {'categories': categories})
 
-def clothing_list(request, id):
-    category = get_object_or_404(Category, id=id)
-    clothing_items = category.clothing_items.all()
-    return render(request, 'shop/clothing_list.html', {'category': category, 'clothing_items': clothing_items})
+def product_list(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    products = category.products.filter(available=True)
+    return render(request, 'shop/product_list.html', {'category': category, 'products': products})
 
-def electronic_list(request, id):
-    category = get_object_or_404(Category, id=id)
-    electronic_items = category.electronic_items.all()
-    return render(request, 'shop/electronic_list.html', {'category': category, 'electronic_items': electronic_items})
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'shop/product_detail.html', {'product': product})    
 
-def workout_list(request, id):
-    category = get_object_or_404(Category, id=id)
-    workout_items = category.workout_items.all()
-    return render(request, 'shop/workout_list.html', {'category': category, 'workout_items': workout_items})
-
-def meal_list(request, id):
-    category = get_object_or_404(Category, id=id)
-    meal_items = category.meal_items.all()
-    return render(request, 'shop/meal_list.html', {'category': category, 'meal_items': meal_items})
+def product_list_by_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    products = Product.objects.filter(category=category)
+    return render(request, 'shop/product_list.html', {
+        'category': category,
+        'products': products,
+    })
