@@ -2,18 +2,31 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1>Your Shopping Bag</h1>
+    <h1 class="display-7 logo-font text-white logo-background mt-5">Your Shopping Bag</h1>
     {% if bag.items.all %}
-        <ul>
-            {% for item in bag.items.all %}
-                <li>
-                    {{ item.product.name }} - Quantity: {{ item.quantity }}
-                    <a href="{% url 'bag:remove_from_bag' item.id %}">Remove</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="row">
+        {% for item in bag.items.all %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ item.product.name }}</h5>
+                        <p class="card-text">Quantity: {{ item.quantity }}</p>
+                        <p class="card-text"><strong>Price:</strong> ${{ item.product.price|floatformat:2 }}</p>
+                        <a href="{% url 'bag:remove_from_bag' item.id %}" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="text-center mt-4">
+        <h4 class="text-white"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+        <a href="#" class="btn btn-primary btn-lg">Proceed to Checkout</a>
+    </div>
+    
     {% else %}
-        <p>Your bag is empty.</p>
+        <p class="text-center">Your bag is empty.</p>
     {% endif %}
 </div>
 {% endblock %}
