@@ -14,8 +14,9 @@
             <h1>{{ product.name }}</h1>
             <p><strong>Price:</strong> ${{ product.price }}</p>
             <p>{{ product.description }}</p>
-            <form action="#" method="POST">
-                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            <form action="{% url 'bag:add_to_bag' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Add to Bag</button>
             </form>
         </div>
     </div>
