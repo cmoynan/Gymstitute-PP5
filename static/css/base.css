@@ -4,17 +4,25 @@ html {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     background: url('/static/images/background1.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: 60vh;
     color: #555;
     font-family: 'Lato';
+    padding-bottom: 60px;
 }
 
-.header {
-    width: 100%;
+.container {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+header {
+    margin-bottom: 0;
+}
+
+h1 {
+    margin-top: 20px;
 }
 
 /* from Bulma */
@@ -75,16 +83,6 @@ body {
     box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
-.card:hover,
-.card:active,
-.card:focus,
-.card:hover
-{
-    background: #000066;
-    color: white;
-}
-
-
 .bg-black {
     background-color: #000;
     text-align: center;
@@ -97,17 +95,6 @@ body {
 
 .border-black {
     border: 1px solid black !important;
-}
-
-.card {
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding-top: 100px;
-}
-
-.card-img-top {
-    height: 150px;
-    object-fit: cover;
 }
 
 .form-group {

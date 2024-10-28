@@ -2,19 +2,19 @@
 
 {% load static %}
 
-
 {% block content %}
 <div class="container mt-5">
-    <h1 class="display-5 logo-font text-white logo-background mt-5">Choose a Category</h1>
-        {% for category in categories %}
-        <ol>
-                    <a href="{% url 'shop:product_list_by_category' category.id %}"
-                        class="shop-now-button btn btn-lrg rounded-4 text-uppercase mb-3">
-                        {{ category.name }}
-                    </a>
-                
-            </div>
-        </ol>
-{% endfor %}
+    <h1 class="display-7 logo-font text-white logo-background mt-5">Choose a Category</h1>
 
+    <div class="list-group mt-4">
+        {% for category in categories %}
+            <div class="mb-3">
+                <a href="{% url 'shop:product_list_by_category' category.id %}" 
+                   class="shop-now-button btn btn-lrg rounded-4 text-uppercase">
+                    {{ category.name }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
