@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Order Success
+{% endblock %}
+
+<h2>Order Success!</h2>
+<p>Thank you for your order, {{ order.user.username }}.</p>
+<p>Order ID: {{ order.id }}</p>
+<a href="{% url 'shop:category_list' %}">Continue Shopping</a>

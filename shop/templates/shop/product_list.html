@@ -18,8 +18,9 @@
                         </div>
                         <div class="mt-auto">
                             <a href="{% url 'shop:product_detail' product.id %}" class="btn btn-secondary btn-sm mb-2">View Details</a>
-                            <form action="#" method="POST">
-                                <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+                            <form action="{% url 'bag:add_to_bag' product.id %}" method="POST" class="add-to-bag-form">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Add to Bag</button>
                             </form>
                         </div>
                     </div>
@@ -27,5 +28,41 @@
             </div>
         {% endfor %}
     </div>
+
+    <!-- Success message area -->
+    <div id="success-message" class="alert alert-success d-none" role="alert">
+        Product added to bag successfully!
+    </div>
 </div>
+
+<!-- JavaScript to handle AJAX submission -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.add-to-bag-form').on('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        var $form = $(this);
+        var formData = $form.serialize(); // Serialize form data
+
+        $.ajax({
+            type: 'POST',
+            url: $form.attr('action'),
+            data: formData,
+            success: function(response) {
+                // Show the success message
+                $('#success-message').removeClass('d-none');
+                // Optionally hide the success message after a few seconds
+                setTimeout(function() {
+                    $('#success-message').addClass('d-none');
+                }, 3000);
+            },
+            error: function(xhr, status, error) {
+                // Handle error if needed
+                console.error('Error adding to bag:', error);
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
