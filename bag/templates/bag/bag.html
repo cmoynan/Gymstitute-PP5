@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    Checkout
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <h1 class="display-7 logo-font text-white logo-background mt-5">Your Shopping Bag</h1>
+
     {% if bag.items.all %}
     <div class="row">
         {% for item in bag.items.all %}
@@ -21,12 +26,13 @@
     </div>
     
     <div class="text-center mt-4">
-        <h4 class="text-white"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
-        <a href="{% url 'checkout:create_order' %}" class="btn btn-primary btn-lg">Proceed to Checkout</a>
+            <h4 class="text-white"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+            <a href="{% url 'checkout:create_order' %}" class="btn btn-primary btn-lg">Proceed to Checkout</a>
+        </div>
     </div>
-    
+
     {% else %}
-        <p class="text-center">Your bag is empty.</p>
+        <p class="text-center text-white">Your bag is empty.</p>
     {% endif %}
 </div>
 {% endblock %}
