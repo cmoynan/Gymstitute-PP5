@@ -1,0 +1,18 @@
+<h2>Order History</h2>
+{% if orders %}
+    <ul>
+        {% for order in orders %}
+            <li>
+                Order {{ order.order_number }} - {{ order.created_at }} - 
+                {% if order.is_paid %}Paid{% else %}Not Paid{% endif %}
+                {% if order.order_number %}
+                    <a href="{% url 'order_detail' order.order_number %}">View Details</a>
+                {% else %}
+                    <span>Order details unavailable</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have no orders.</p>
+{% endif %}

@@ -1,24 +1,42 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Checkout
+Checkout
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2 class="text-white">Checkout</h2>
-    {% if items %}
-        <ul>
-            {% for item in items %}
-                <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
-            {% endfor %}
-        </ul>
-        <form method="POST">
+<div class="container mt-5">
+    <h1 class="display-7 logo-font text-white logo-background mt-5">Your Shopping Bag</h1>
+
+    {% if bag.items.all %}
+    <div class="row">
+        {% for item in bag.items.all %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="card-img-top"
+                    style="height: 200px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                    <p class="card-text"><strong>Price:</strong> ${{ item.product.price|floatformat:2 }}</p>
+                    <a href="{% url 'bag:remove_from_bag' item.id %}" class="btn btn-danger">Remove</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <h4 class="text-white"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+        <form method="POST" class="text-center">
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Place Order</button>
+            <button type="submit" class="btn btn-primary btn-lg">Place Order</button>
         </form>
-    {% else %}
-        <p>Your bag is empty.</p>
-    {% endif %}
+    </div>
+</div>
+
+{% else %}
+<p class="text-center text-white">Your bag is empty.</p>
+{% endif %}
 </div>
 {% endblock %}
