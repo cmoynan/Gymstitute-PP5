@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from bag.models import Bag, BagItem
 from shop.models import Product
+from profiles.models import UserProfile
 import uuid
 
 # Create your models here.

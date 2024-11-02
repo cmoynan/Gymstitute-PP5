@@ -9,7 +9,7 @@ from django.db import transaction
 
 @login_required
 @transaction.atomic
-def create_order(request):
+def checkout(request):
     bag = get_object_or_404(Bag, user=request.user)
     items = bag.items.all()  # Retrieve all items in the bag
 
@@ -33,18 +33,16 @@ def create_order(request):
         bag.items.all().delete()
         
         # Redirect to the order success page
-        return redirect('checkout:order_success', order_id=order.id)
+        return redirect('checkout:order_confirmation', order_id=order.id)
 
     # Render the checkout page with bag items and grand total
-    return render(request, 'checkout/create_order.html', {
+    return render(request, 'checkout/checkout.html', {
         'bag': bag,
         'items': items,
         'grand_total': grand_total,
     })
 
 @login_required
-def order_success(request, order_id):
+def order_confirmation(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
-    return render(request, 'checkout/order_success.html', {'order': order})
-
-
+    return render(request, 'checkout/order_confirmation.html', {'order': order})
