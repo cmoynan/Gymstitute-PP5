@@ -12,6 +12,16 @@ class Order(models.Model):
     is_paid = models.BooleanField(default=False)
     order_number = models.CharField(max_length=32, unique=True, blank=True, null=False)
 
+    full_name = models.CharField(max_length=100, default="John Doe")
+    email = models.EmailField(default="example@example.com")
+    phone_number = models.CharField(max_length=20, blank=True, null=True, default="000-000-0000")
+    street_address1 = models.CharField(max_length=80, default="123 Default St")
+    street_address2 = models.CharField(max_length=80, blank=True, default="")
+    town_or_city = models.CharField(max_length=40, default="Default City")
+    county = models.CharField(max_length=40, blank=True, default="")
+    postcode = models.CharField(max_length=20, blank=True, default="")
+    country = models.CharField(max_length=40, default="United States")
+
     def save(self, *args, **kwargs):
         if not self.order_number:
             # Generate a unique 8-character order number
@@ -29,3 +39,5 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name} in order {self.order.order_number}"
+
+
