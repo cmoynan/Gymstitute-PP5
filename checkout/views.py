@@ -7,8 +7,6 @@ from .forms import CheckoutForm
 from django.db import transaction
 import stripe
 
-
-# Create your views here.
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @login_required
@@ -34,21 +32,35 @@ def checkout(request):
                     price=item.product.price
                 )
 
-            # Create Stripe Payment Intent
-            intent = stripe.PaymentIntent.create(
-                amount=int(grand_total * 100),  # Amount in cents
-                currency='usd',
-            )
+            try:
+                # Create Stripe Payment Intent
+                intent = stripe.PaymentIntent.create(
+                    amount=int(grand_total * 100),  # Amount in cents
+                    currency='usd',
+                )
 
-            # Save payment intent ID to the order and set client secret
-            order.payment_intent_id = intent.id
-            order.save()
+                # Save payment intent ID to the order and set client secret
+                order.payment_intent_id = intent.id
+                order.save()
 
-            # Clear the bag
-            bag.items.all().delete()
+                # Clear the bag
+                bag.items.all().delete()
 
-            # Redirect to order confirmation
-            return redirect('checkout:order_confirmation', order_id=order.id)
+                # Redirect to order confirmation
+                return redirect('checkout:order_confirmation', order_id=order.id)
+
+            except stripe.error.StripeError as e:
+                # Handle Stripe errors (log them, show a message, etc.)
+                form.add_error(None, "Payment error: {}".format(str(e)))
+                return render(request, 'checkout/checkout.html', {
+                    'bag': bag,
+                    'items': items,
+                    'grand_total': grand_total,
+                    'form': form,
+                    'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+                    'client_secret': None,
+                })
+
     else:
         form = CheckoutForm()
 

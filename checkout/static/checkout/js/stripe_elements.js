@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Initializing Stripe"); // Check if this log appears
-    const stripe = Stripe("{{ stripe_public_key }}");
+    const stripe = Stripe(document.getElementById('id_stripe_public_key').textContent);
     const elements = stripe.elements();
-    console.log("Stripe initialized"); // Check if this log appears
 
     const cardElement = elements.create('card', {
         style: {
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     cardElement.mount('#card-element');
-    console.log("Card element mounted"); // Check if this log appears
 
     cardElement.on('change', function(event) {
         const displayError = document.getElementById('card-errors');
@@ -32,13 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('payment-form').addEventListener('submit', async function(event) {
         event.preventDefault();
-        const form = document.getElementById('payment-form');
-        
-        const { error, paymentIntent } = await stripe.confirmCardPayment("{{ client_secret }}", {
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(document.getElementById('id_client_secret').textContent, {
             payment_method: {
                 card: cardElement,
                 billing_details: {
-                    // Gather form details here
+                    name: document.querySelector('input[name="full_name"]').value,
+                    email: document.querySelector('input[name="email"]').value,
+                    // Include other fields as necessary
                 }
             }
         });
@@ -46,7 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (error) {
             document.getElementById('card-errors').textContent = error.message;
         } else if (paymentIntent.status === 'succeeded') {
-            form.submit(); // Submit the form to your backend for further processing
+            // Payment was successful, now submit the form to complete the order
+            const form = document.getElementById('payment-form');
+            form.submit();
         }
     });
 });
